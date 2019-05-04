@@ -1,0 +1,14 @@
+environment=TestURL
+browser=chrome
+browserDriverPath=\\src\\test\\resources\\drivers\\
+chromeDriver=chromedriver.exe
+firefoxDriver=geckodriver.exe
+ieDriver=IEDriverServer.exe
+
+API_KEY = nDf64FZTr1228auFM99wzb6QQBVOacVN3sg7XtkoBel8110
+
+implicitWaitTime=5
+webdriverWaitTime=10
+
+base.url = http://automationpractice.com/index.php
+        
