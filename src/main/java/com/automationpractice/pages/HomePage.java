@@ -44,11 +44,11 @@ public class HomePage {
 
 	public void productMatches(String searchKey) {
 		int productCount = productList.size();
-		System.out.println("Number of Product Listed: "+productCount);
+		log.info("Number of Product Listed: "+productCount);
 		String product = null;
 		for(int i=0; i<productCount; i++) {
 			product = productList.get(i).getText().toLowerCase();
-			System.out.println(product);
+			log.info(product);
 			Assert.assertTrue(product+" does not contain search key "+searchKey, product.contains(searchKey));
 		}
 	}
@@ -66,13 +66,13 @@ public class HomePage {
 	public void validateSubCategory(String subCategory) {
 		subCategory = subCategory.toUpperCase().trim();
 		String actualSubCategory = this.subCategory.getText().trim();
-		System.out.println("Sub-Category Expected: "+subCategory+" Actual: "+actualSubCategory);
+		log.info("Sub-Category Expected: "+subCategory+" Actual: "+actualSubCategory);
 		Assert.assertEquals("Sub Category was not matching", subCategory,actualSubCategory);
 	}
 
 	public void validateTitle(String subCategory) {
 		String actualTitle = driver.getTitle();
-		System.out.println("Title Expected: "+subCategory+" Actual: "+actualTitle);
+		log.info("Title Expected: "+subCategory+" Actual: "+actualTitle);
 		Assert.assertTrue("Title was not matching", actualTitle.contains(subCategory));
 	}
 

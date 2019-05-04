@@ -32,7 +32,7 @@ public class LoginPage {
 	}
 
 	public void enterEmailToCreateAccount(String email) {
-		System.out.println("Entering from Login Page");
+		log.info("Entering from Login Page");
 		//createAccountEmail.clear();
 		createAccountEmail.sendKeys(email);
 	}

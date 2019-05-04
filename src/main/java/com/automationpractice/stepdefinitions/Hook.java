@@ -27,7 +27,7 @@ public class Hook {
 
 	@After
 	public void closeBrowser(Scenario scenario) {
-		if(!scenario.isFailed()) {
+		if(scenario.isFailed()) {
 			TakesScreenshot ts = (TakesScreenshot) DriverManager.getInstance().getDriver();
 			byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
 			scenario.embed(screenshot, "image/png");
