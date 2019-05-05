@@ -2,6 +2,7 @@ package com.automationpractice.stepdefinitions;
 
 import java.util.Random;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,9 +61,11 @@ public class CreateAccoutStepDefinition {
 	   createAccountPage.createAccount(createAccount);
 	}
 
-	@Then("^I should be navigated to My Account screen$")
-	public void i_should_be_navigated_to_My_Account_screen() {
-		myAccountPage.validatesUserIsInMyAccountsPage();
+	@Then("^I should be navigated to (.*) screen$")
+	public void i_should_be_navigated_to_screen(String pageTitle) {
+		Assert.assertEquals("Page heading is Not correct", pageTitle.toUpperCase(), myAccountPage.getPageHeading());
+		log.info("Page Title is: "+driver.getTitle());
+		Assert.assertTrue("Page Title is Not correct", driver.getTitle().contains(pageTitle));
 	    log.info("User is in My Accounts screen");
 	}
 	

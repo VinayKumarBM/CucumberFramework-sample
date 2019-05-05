@@ -63,17 +63,10 @@ public class HomePage {
 		driver.findElement(By.linkText(subCategory.toUpperCase())).click();
 	}
 
-	public void validateSubCategory(String subCategory) {
-		subCategory = subCategory.toUpperCase().trim();
+	public String validateSubCategory() {
 		String actualSubCategory = this.subCategory.getText().trim();
-		log.info("Sub-Category Expected: "+subCategory+" Actual: "+actualSubCategory);
-		Assert.assertEquals("Sub Category was not matching", subCategory,actualSubCategory);
-	}
-
-	public void validateTitle(String subCategory) {
-		String actualTitle = driver.getTitle();
-		log.info("Title Expected: "+subCategory+" Actual: "+actualTitle);
-		Assert.assertTrue("Title was not matching", actualTitle.contains(subCategory));
+		log.info("Sub-Category Actual: "+actualSubCategory);
+		return actualSubCategory;
 	}
 
 	public void clickOnSignInLink() {

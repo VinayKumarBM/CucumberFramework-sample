@@ -1,5 +1,6 @@
 package com.automationpractice.stepdefinitions;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,11 +54,11 @@ public class SearchProductStepDefinition {
 
 	@Then("^I should see only (.*)$")
 	public void i_should_only_see(String subCategory) {
-	  homePage.validateSubCategory(subCategory);
+	  Assert.assertEquals("Sub Category was not matching", subCategory.toUpperCase(),homePage.validateSubCategory());
 	}
 
 	@Then("^Title of the page should be (.*)$")
 	public void title_of_the_page_should_be(String subCategory) {
-		homePage.validateTitle(subCategory); 
+		Assert.assertTrue("Title was not matching", driver.getTitle().contains(subCategory));
 	}
 }

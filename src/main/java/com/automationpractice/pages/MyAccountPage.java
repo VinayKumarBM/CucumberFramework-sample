@@ -1,6 +1,5 @@
 package com.automationpractice.pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,10 +18,10 @@ public class MyAccountPage {
 		PageFactory.initElements(driver, this);
 		this.driver = driver;
 	}
-	
-	public void validatesUserIsInMyAccountsPage() {
-		Assert.assertTrue("Page Title is Not correct", driver.getTitle().contains("My account"));
-		Assert.assertEquals("Page heading is Not correct", "MY ACCOUNT", pageHeading.getText().trim());
+
+	public String getPageHeading() {
+		log.info("Page headding is: "+pageHeading.getText());
+		return pageHeading.getText().trim();
 	}
 
 }
