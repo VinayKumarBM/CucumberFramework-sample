@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-
-import com.applitools.eyes.selenium.Eyes;
 
 import cucumber.api.Scenario;
 
@@ -42,6 +42,7 @@ public class DriverManager {
 	
 */	public WebDriver launchBrowser(Scenario scenario) {	
 		String driverPath = System.getProperty("user.dir")+GetConfig.getConfigProperty("browserDriverPath")+"%s";
+		log.info("Launching "+driverType+" browser.");
 		switch (driverType) {     
 		case FIREFOX : 
 			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("firefoxDriver")));
@@ -49,7 +50,12 @@ public class DriverManager {
 			break;
 		case CHROME : 
 			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("chromeDriver")));
-			driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("disable-infobars");
+		//	options.addArguments("--start-maximized");
+			options.setAcceptInsecureCerts(true);
+			options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+			driver = new ChromeDriver(options);
 			break;
 		case INTERNETEXPLORER : 
 			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("ieDriver")));
@@ -76,6 +82,7 @@ public class DriverManager {
 	}
 
 	public void closeDriver() {
+		log.info("Closing Browser");
 		driver.quit();
 //		eyes.close();
 //		eyes.abortIfNotClosed();

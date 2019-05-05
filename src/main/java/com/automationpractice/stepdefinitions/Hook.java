@@ -21,7 +21,6 @@ public class Hook {
 		log.info("\t\t\t--{		-TEST STARTS-		}--");
 		log.info("");
 		log.info("*****************************************************************************************");
-		log.info("Launching Browser");
 		DriverManager.getInstance().launchBrowser(scenario);
 	}
 
@@ -33,7 +32,6 @@ public class Hook {
 			scenario.embed(screenshot, "image/png");
 			log.info("Completed taking screenshot of failed scenario");
 		}
-		log.info("Closing Browser");
 		DriverManager.getInstance().closeDriver();
 		log.info("*****************************************************************************************");
 		log.info("");

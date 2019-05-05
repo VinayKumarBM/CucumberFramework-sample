@@ -24,7 +24,7 @@ import cucumber.api.junit.Cucumber;
         plugin = {"pretty", "html:target/generated-reports/cucumber-report",
                 "json:target/generated-reports/CucumberTestReport.json",
                 "rerun:target/generated-reports/rerun.txt"},
-        tags = {"@createNewAccount"}
+        tags = {"@testApp"}
 		//,dryRun = true
 )
 public class FeatureRunner {
