@@ -1,7 +1,5 @@
 package com.automationpractice.stepdefinitions;
 
-import java.util.Random;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -18,7 +16,6 @@ import com.framework.utilities.TestScenario;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 
 public class CreateAccoutStepDefinition {
 	private static final Logger log = LoggerFactory.getLogger(CreateAccoutStepDefinition.class);
@@ -45,8 +42,7 @@ public class CreateAccoutStepDefinition {
 
 	@When("^I enter valid email id to create an account$")
 	public void i_enter_valid_email_id_and_click_on_create_account_button() {
-		Random random = new Random();
-		int randNumb = random.nextInt(999);
+		long randNumb = System.currentTimeMillis();
 		String email = String.format("test%s@gmail.com", randNumb);
 	    loginPage.enterEmailToCreateAccount(email);
 	    loginPage.clickOnCreateAccountButton();

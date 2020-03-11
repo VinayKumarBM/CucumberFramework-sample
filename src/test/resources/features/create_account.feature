@@ -11,4 +11,11 @@ Feature: This is to test features related to Create Account
     Then I should be navigated to My account screen
     Examples:
     |content_firstName	|
-    |first				|
+    |first							|
+    
+  @createNewAccount
+  Scenario: To create a new Account
+    Given I am on the application
+    When I navigate to Login Page by clicking on Sign In button
+    And I enter valid email id to create an account
+    Then I should be navigated to My account screen  

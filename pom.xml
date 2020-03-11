@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.newell</groupId>
-	<artifactId>VisualTesting</artifactId>
+	<artifactId>CucumberSampleProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -101,6 +101,31 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<!-- To generate report similar to Jenkin report,maven-cucumber-reporting 
+				plug-in is used. this reads the generated cucumber.json file in local directory 
+				and generates cucumber-JVM-reports -->
+			<plugin>
+				<groupId>net.masterthought</groupId>
+				<artifactId>maven-cucumber-reporting</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<id>execution</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<projectName>cucumber-jvm-example</projectName>
+							<outputDirectory>${project.build.directory}/cucumber-JVM-reports</outputDirectory>
+							<cucumberOutput>${project.build.directory}/generated-reports/CucumberTestReport.json</cucumberOutput>
+							<skippedFails>true</skippedFails>
+							<enableFlashCharts>true</enableFlashCharts>
+							<buildNumber>10</buildNumber>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
