@@ -10,7 +10,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -78,7 +77,7 @@ public class ElementOperations {
 		return valueList;
 	}
 	
-	public void waitForvisibilityOfElement(WebElement element){
+	public void waitForVisibilityOfElement(WebElement element){
 		WebDriverWait wait = new WebDriverWait(driver, waitTime);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
@@ -221,9 +220,9 @@ public class ElementOperations {
 	
 	public boolean isVisible(WebElement element) {
 		try{
-			waitForvisibilityOfElement(element);
+			waitForVisibilityOfElement(element);
 			return element.isDisplayed();
-		}catch (NoSuchElementException exp){
+		}catch (Exception exp){
 			return false;
 		}
 	}

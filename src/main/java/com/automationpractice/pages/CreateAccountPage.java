@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.automationpractice.helper.ElementOperations;
 import com.automationpractice.models.CreateAccount;
 
 public class CreateAccountPage {
@@ -27,6 +28,9 @@ public class CreateAccountPage {
 	
 	@FindBy(id = "customer_lastname")
 	WebElement lastName;
+	
+	@FindBy(id = "email")
+	WebElement email;
 	
 	@FindBy(id = "passwd")
 	WebElement password;
@@ -114,5 +118,11 @@ public class CreateAccountPage {
 		enterMobilePhone(createAccount.createNewAccount.mobilePhone);
 		enterAliasAddress(createAccount.createNewAccount.aliasAddress);
 		clickOnRegisterButton();
+	}
+	
+	public String getEmailUsedForRegistering() {
+		new ElementOperations(driver).waitForVisibilityOfElement(firstName);
+		log.info("email ID used for registering: "+email.getAttribute("value"));
+		return email.getAttribute("value").trim();
 	}
 }

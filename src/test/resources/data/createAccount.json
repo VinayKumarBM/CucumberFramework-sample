@@ -1,16 +1,16 @@
 [
 	{
 		"createNewAccount": {
-			"address": "address1",
+			"address": "1255 Raritan Road, New Jersey",
 			"aliasAddress": "alias Address",
-			"city": "city",
+			"city": "Newark",
 			"country": "United States",
-			"firstName": "first",
-			"lastName": "last",
+			"firstName": "Jon",
+			"lastName": "Doe",
 			"mobilePhone": "9876543210",
 			"password": "password",
 			"state": "Indiana",
-			"zipCode": "12345"
+			"zipCode": "07102"
 		}
 	}
 ]

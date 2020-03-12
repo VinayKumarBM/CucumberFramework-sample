@@ -1,29 +1,43 @@
 package com.framework.utilities;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class TestScenario {
-	private static TestScenario scenario = new TestScenario();
-	private  Map<String, Object> scenarioContext;
+	private static TestScenario scenario = null;
+	private static ThreadLocal<HashMap<String, Object>> scenarioContext = new ThreadLocal<HashMap<String, Object>>() {
+		 @Override
+		    protected HashMap<String, Object> initialValue() {
+		        return new HashMap<>();
+		    }
+	};
 
     private TestScenario(){
-        scenarioContext = new HashMap<>();
+       
     }
 
-    public static TestScenario getScenario() {
+    public static TestScenario getSession() {
+    	if(scenario == null) {
+    		System.out.println("Scenario is null");
+    		synchronized (TestScenario.class) 
+    		{ 
+    			if(scenario==null) 
+    			{ 
+    				scenario = new TestScenario();
+    			}
+    		}
+    	}
     	return scenario;
     }
     
-    public void setSessionVariable(String key, Object value) {
-        scenarioContext.put(key, value);
+    public void setVariable(String key, Object value) {
+    	scenarioContext.get().put(key, value);
     }
 
-    public Object getSessionVariable(String key){
-        return scenarioContext.get(key);
+    public Object getVariable(String key){
+        return scenarioContext.get().get(key);
     }
 
-    public Boolean containsSessionVariable(String key){
-        return scenarioContext.containsKey(key);
+    public boolean containsVariable(String key){
+        return scenarioContext.get().containsKey(key);
     }
 }

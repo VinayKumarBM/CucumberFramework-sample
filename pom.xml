@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>VisualTesting</name>
+	<name>CucumberProject</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -104,7 +104,7 @@
 			</plugin>
 			<!-- To generate report similar to Jenkin report,maven-cucumber-reporting 
 				plug-in is used. this reads the generated cucumber.json file in local directory 
-				and generates cucumber-JVM-reports -->
+				and generates cucumber-JVM-reports 
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
@@ -126,7 +126,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>		-->
 		</plugins>
 	</build>
 </project>
