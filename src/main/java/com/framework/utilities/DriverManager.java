@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import cucumber.api.Scenario;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class DriverManager {
@@ -19,7 +20,6 @@ public class DriverManager {
 	private static DriverManager driverManager = new DriverManager();
 	private WebDriver driver;
 	private DriverType driverType;
-	private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
 //	private Eyes eyes;
 
 	private DriverManager() {
@@ -41,24 +41,22 @@ public class DriverManager {
 	}
 	
 */	public WebDriver launchBrowser(Scenario scenario) {	
-		String driverPath = System.getProperty("user.dir")+GetConfig.getConfigProperty("browserDriverPath")+"%s";
 		log.info("Launching "+driverType+" browser.");
 		switch (driverType) {     
 		case FIREFOX : 
-			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("firefoxDriver")));
+			WebDriverManager.firefoxdriver().arch32().setup();
 			driver = new FirefoxDriver();
 			break;
 		case CHROME : 
-			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("chromeDriver")));
+			WebDriverManager.chromedriver().arch32().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("disable-infobars");
-		//	options.addArguments("--start-maximized");
 			options.setAcceptInsecureCerts(true);
 			options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 			driver = new ChromeDriver(options);
 			break;
 		case INTERNETEXPLORER : 
-			System.setProperty(CHROME_DRIVER_PROPERTY, String.format(driverPath, GetConfig.getConfigProperty("ieDriver")));
+			WebDriverManager.iedriver().arch32().setup();
 			driver = new InternetExplorerDriver();
 			break;
 		}
