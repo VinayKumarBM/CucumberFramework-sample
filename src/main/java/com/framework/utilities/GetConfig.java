@@ -1,15 +1,16 @@
 package com.framework.utilities;
 
-import org.junit.Test;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Logger;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GetConfig {
-    private final static Logger logger = Logger.getLogger(GetConfig.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(GetConfig.class.getName());
 
     @SuppressWarnings("finally")
     public static String getConfigProperty(String property) {
@@ -26,7 +27,7 @@ public class GetConfig {
 
         } catch (Exception e) { // IO or NullPointer exceptions possible in
             // block above
-            logger.info(String.format("Error reading Config file! please fix and rebuild!"));
+            log.info(String.format("Error reading Config file! please fix and rebuild!"));
             e.printStackTrace();
             System.exit(1);
         } finally {

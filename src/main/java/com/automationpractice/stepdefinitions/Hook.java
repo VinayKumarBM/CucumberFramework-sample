@@ -1,9 +1,9 @@
 package com.automationpractice.stepdefinitions;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.framework.utilities.DriverManager;
 
@@ -12,7 +12,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class Hook {
-	private final Log log = LogFactory.getLog(Hook.class);
+	private static final Logger log = LoggerFactory.getLogger(Hook.class);
 	
 	@Before
 	public void launchBrowser(Scenario scenario) {

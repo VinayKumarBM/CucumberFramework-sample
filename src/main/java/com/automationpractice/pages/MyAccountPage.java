@@ -14,6 +14,9 @@ public class MyAccountPage {
 	@FindBy(css = ".page-heading")
 	WebElement pageHeading;
 
+	@FindBy(css = "a.account>span")
+	WebElement userName;
+	
 	public MyAccountPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 		this.driver = driver;
@@ -22,6 +25,11 @@ public class MyAccountPage {
 	public String getPageHeading() {
 		log.info("Page headding is: "+pageHeading.getText());
 		return pageHeading.getText().trim();
+	}
+	
+	public String getUserName() {
+		log.info("Logged in user is: "+userName.getText());
+		return userName.getText().trim();
 	}
 
 }

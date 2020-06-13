@@ -14,19 +14,23 @@ import com.rajatthareja.reportbuilder.Color;
 import com.rajatthareja.reportbuilder.ReportBuilder;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 
-
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/features/"},
+@CucumberOptions(
+		features = {"src/test/resources/features/"},
         glue = {"com.automationpractice.stepdefinitions"},
         monochrome = true,
         plugin = {"pretty", "html:target/generated-reports/cucumber-report",
                 "json:target/generated-reports/CucumberTestReport.json",
+                "usage:target/generated-reports/cucumber-usage.json", 
+                "junit:target/generated-reports/cucumber-results.xml",
                 "rerun:target/generated-reports/rerun.txt"},
-        tags = {"@testApp"}
-		//,dryRun = true
-)
+        snippets = SnippetType.CAMELCASE,
+//        dryRun = true,
+        tags = {"@testApp"}	
+		)
 public class FeatureRunner {
 	private static final Log log = LogFactory.getLog(FeatureRunner.class);
 	

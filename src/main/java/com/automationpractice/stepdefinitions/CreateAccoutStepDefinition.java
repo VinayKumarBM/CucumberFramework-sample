@@ -1,7 +1,5 @@
 package com.automationpractice.stepdefinitions;
 
-import java.util.Random;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -19,7 +17,6 @@ import com.framework.utilities.TestScenario;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-
 public class CreateAccoutStepDefinition {
 	private static final Logger log = LoggerFactory.getLogger(CreateAccoutStepDefinition.class);
 	private WebDriver driver;
@@ -27,11 +24,9 @@ public class CreateAccoutStepDefinition {
 	private LoginPage loginPage;	
 	private CreateAccountPage createAccountPage;	
 	private MyAccountPage myAccountPage;
-	private TestScenario scenario;
 	
 	public CreateAccoutStepDefinition() {
 		driver = DriverManager.getInstance().getDriver();
-		scenario = TestScenario.getScenario();
 		homePage = new HomePage(driver);
 		loginPage = new LoginPage(driver);
 		createAccountPage = new CreateAccountPage(driver);
@@ -45,29 +40,29 @@ public class CreateAccoutStepDefinition {
 
 	@When("^I enter valid email id to create an account$")
 	public void i_enter_valid_email_id_and_click_on_create_account_button() {
-		Random random = new Random();
-		int randNumb = random.nextInt(999);
+		long randNumb = System.currentTimeMillis();
 		String email = String.format("test%s@gmail.com", randNumb);
 	    loginPage.enterEmailToCreateAccount(email);
 	    loginPage.clickOnCreateAccountButton();
 	    log.info("Email to create account: "+email);
-	    scenario.setSessionVariable("email", email);
+	    TestScenario.getSession().setVariable("email", email);
 	}
 
-	@When("^I enter valid (.*) and register the user$")
-	public void i_enter_valid_first_and_register_the_user(String dataKey) {
+	@When("^I enter valid details (.*) and register the user$")
+	public void i_enter_valid_details_and_register_the_user(String dataKey) {
 	   JsonReader json = new JsonReader();
 	   CreateAccount createAccount = json.getpageByFirstName(dataKey);
+	   Assert.assertEquals("email used for registering did not match", TestScenario.getSession().getVariable("email"), createAccountPage.getEmailUsedForRegistering());
+	   TestScenario.getSession().setVariable("userName", createAccount.createNewAccount.firstName+" "+createAccount.createNewAccount.lastName);
 	   createAccountPage.createAccount(createAccount);
 	}
 
 	@Then("^I should be navigated to (.*) screen$")
 	public void i_should_be_navigated_to_screen(String pageTitle) {
 		Assert.assertEquals("Page heading is Not correct", pageTitle.toUpperCase(), myAccountPage.getPageHeading());
+		Assert.assertEquals("User Name is Not correct", TestScenario.getSession().getVariable("userName"), myAccountPage.getUserName());
 		log.info("Page Title is: "+driver.getTitle());
 		Assert.assertTrue("Page Title is Not correct", driver.getTitle().contains(pageTitle));
 	    log.info("User is in My Accounts screen");
-	}
-	
-	
+	}	
 }
