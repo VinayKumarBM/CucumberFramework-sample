@@ -16,10 +16,8 @@ public class Hook {
 	
 	@Before
 	public void launchBrowser(Scenario scenario) {
-		log.info("*****************************************************************************************");
-		log.info("");
-		log.info("\t\t\t--{		-TEST STARTS-		}--");
-		log.info("");
+		log.info("*****************************************************************************************\n");
+		log.info("\t--{ Scenario: "+scenario.getName().toUpperCase()+" - STARTED }--\n");
 		log.info("*****************************************************************************************");
 		DriverManager.getInstance().launchBrowser(scenario);
 	}
@@ -33,10 +31,8 @@ public class Hook {
 			log.info("Completed taking screenshot of failed scenario");
 		}
 		DriverManager.getInstance().closeDriver();
-		log.info("*****************************************************************************************");
-		log.info("");
-		log.info("\t\t\t--{		-TEST "+scenario.getStatus().toString().toUpperCase()+"-		}--");
-		log.info("");
+		log.info("*****************************************************************************************\n");
+		log.info("\t--{ Scenario: "+scenario.getName().toUpperCase()+" - "+scenario.getStatus().toString().toUpperCase()+" }--\n");
 		log.info("*****************************************************************************************");
 	}
 }
