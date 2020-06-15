@@ -51,10 +51,13 @@ public class FeatureRunner {
         reportBuilder.disableVoiceControl();        
         
         // Add additional info for Report
-        reportBuilder.setAdditionalInfo("Operating System", "Windows 7");
-        reportBuilder.setAdditionalInfo("Browser", GetConfig.getConfigProperty("browser"));
-        reportBuilder.setAdditionalInfo("Environment", GetConfig.getConfigProperty("base.url"));
-
+        reportBuilder.setAdditionalInfo("Environment:", GetConfig.getConfigProperty("environment"));
+        reportBuilder.setAdditionalInfo("Test URL:", GetConfig.getConfigProperty("base.url"));
+        reportBuilder.setAdditionalInfo("Operating System:", GetConfig.getConfigProperty("os")+" "
+        		+GetConfig.getConfigProperty("os_version"));
+        reportBuilder.setAdditionalInfo("Browser:", GetConfig.getConfigProperty("browser")+" "+ 
+        		GetConfig.getConfigProperty("browser_version"));        
+        
         // Create list or report Files or Directories or URLs or JSONObject or JSONString
         List<Object> cucumberJsonReports = new ArrayList<>();
         cucumberJsonReports.add(new File("target/generated-reports/CucumberTestReport.json"));        

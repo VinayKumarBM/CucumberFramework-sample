@@ -1,5 +1,7 @@
 package com.automationpractice.stepdefinitions;
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.slf4j.Logger;
@@ -15,7 +17,7 @@ public class Hook {
 	private static final Logger log = LoggerFactory.getLogger(Hook.class);
 	
 	@Before
-	public void launchBrowser(Scenario scenario) {
+	public void launchBrowser(Scenario scenario) throws MalformedURLException {
 		log.info("*****************************************************************************************\n");
 		log.info("\t--{ Scenario: "+scenario.getName().toUpperCase()+" - STARTED }--\n");
 		log.info("*****************************************************************************************");

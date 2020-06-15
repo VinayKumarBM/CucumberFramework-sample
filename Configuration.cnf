@@ -1,6 +1,8 @@
-environment=TestURL
-browser=chrome
-
+environment=QA
+os=Windows
+os_version=10
+browser=IE
+browser_version=11
 implicitWaitTime=5
 webdriverWaitTime=10
 

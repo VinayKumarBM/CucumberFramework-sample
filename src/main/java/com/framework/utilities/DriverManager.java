@@ -1,24 +1,24 @@
 package com.framework.utilities;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import cucumber.api.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class DriverManager {
 	private static final Logger log = LoggerFactory.getLogger(DriverManager.class);
 	private static DriverManager driverManager;
 	private static ThreadLocal<WebDriver> tDriver = new ThreadLocal<>();
+	public static final String USERNAME = "bmvinayk";
+	public static final String AUTOMATE_KEY = "adsadWewcasdhf";
+	public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 	//	private Eyes eyes;
 
 	private DriverManager() {
@@ -49,46 +49,24 @@ public class DriverManager {
 		return eyes;
 	}
 	 */	
-	public synchronized WebDriver launchBrowser(Scenario scenario) {	
-		DriverType driverType = getBrowser();
+	public synchronized WebDriver launchBrowser(Scenario scenario) throws MalformedURLException {	
 		WebDriver driver = null;
-		log.info("Launching "+driverType+" browser.");
-		switch (driverType) {     
-		case FIREFOX :
-			WebDriverManager.firefoxdriver().arch32().setup();
-			driver = new FirefoxDriver();
-			break;
-		case CHROME : 
-			WebDriverManager.chromedriver().arch32().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-infobars;");
-			options.setAcceptInsecureCerts(true);
-			options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-			driver = new ChromeDriver(options);
-			break;
-		case INTERNETEXPLORER : 
-			WebDriverManager.iedriver().arch32().setup();
-			driver = new InternetExplorerDriver();
-			break;
-		}
+		DesiredCapabilities caps = new DesiredCapabilities();        
+		caps.setCapability("os", GetConfig.getConfigProperty("os"));
+		caps.setCapability("os_version", GetConfig.getConfigProperty("os_version"));
+		caps.setCapability("resolution", "1024x768");
+		caps.setCapability("browser", GetConfig.getConfigProperty("browser"));
+	    caps.setCapability("browser_version", GetConfig.getConfigProperty("browser_version"));
+	    caps.setCapability("name", "BrowserStack "+GetConfig.getConfigProperty("browser")+" Test");
+		
+		log.info("Launching "+GetConfig.getConfigProperty("browser")+" browser.");
+		driver = new RemoteWebDriver(new java.net.URL(URL), caps);
 		//		String[] sourceTag = scenario.getSourceTagNames().toArray(new String[0]);
 		//		eyes.open(driver, sourceTag[0], scenario.getName());
 		tDriver.set(driver);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Long.parseLong(GetConfig.getConfigProperty("implicitWaitTime")), TimeUnit.SECONDS);
 		return driver;
-	}
-
-	private DriverType getBrowser() {
-		String browserName = GetConfig.getConfigProperty("browser");
-		if(browserName == null || browserName.equals("chrome")) 
-			return DriverType.CHROME;
-		else if(browserName.equalsIgnoreCase("firefox")) 
-			return DriverType.FIREFOX;
-		else if(browserName.equals("iexplorer")) 
-			return DriverType.INTERNETEXPLORER;
-		else 
-			throw new RuntimeException("Browser Name Key value in Configuration.properties is not matched : " + browserName);
 	}
 
 	public synchronized void closeDriver() {
