@@ -1,8 +1,9 @@
 environment=TestURL
 browser=chrome
 
-implicitWaitTime=5
-webdriverWaitTime=10
+implicitWaitTime=10
+webdriverWaitTime=30
 
 base.url = http://automationpractice.com/index.php
-        
+
+attachmentPath = /src/test/resources/data/attachment.txt        

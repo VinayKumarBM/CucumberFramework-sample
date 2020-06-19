@@ -28,7 +28,7 @@ import cucumber.api.junit.Cucumber;
                 "junit:target/generated-reports/cucumber-results.xml",
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
-//        dryRun = true,
+        //dryRun = true,
         tags = {"@testApp"}	
 		)
 public class FeatureRunner {

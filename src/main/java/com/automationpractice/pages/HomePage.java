@@ -17,19 +17,22 @@ public class HomePage {
 	private WebDriver driver;
 
 	@FindBy(name = "search_query")
-	WebElement searchBox;
+	private WebElement searchBox;
 
 	@FindBy(name = "submit_search")
-	WebElement searchButton;
+	private WebElement searchButton;
 
 	@FindBy(xpath = "//div[@class='right-block']/h5/a[@class='product-name']")
-	List <WebElement> productList;
+	private List <WebElement> productList;
 
 	@FindBy(xpath = "//span[@class='cat-name']")
-	WebElement subCategory;
+	private WebElement subCategory;
 
 	@FindBy(partialLinkText = "Sign in")
-	WebElement signIn_Link;
+	private WebElement signInLink;
+	
+	@FindBy(css = "#contact-link>a")
+	private WebElement contactUsLink;
 	
 	public HomePage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -70,6 +73,10 @@ public class HomePage {
 	}
 
 	public void clickOnSignInLink() {
-		signIn_Link.click();
+		signInLink.click();
+	}
+	
+	public void clickOnContactUsLink() {
+		contactUsLink.click();
 	}
 }

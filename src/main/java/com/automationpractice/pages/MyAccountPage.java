@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MyAccountPage {
-	private static final Logger log = LoggerFactory.getLogger(LoginPage.class);
+	private static final Logger log = LoggerFactory.getLogger(MyAccountPage.class);
 	private WebDriver driver;
 	
 	@FindBy(css = ".page-heading")
@@ -16,6 +16,9 @@ public class MyAccountPage {
 
 	@FindBy(css = "a.account>span")
 	WebElement userName;
+	
+	@FindBy(css = ".logout")
+	WebElement logoutButton;
 	
 	public MyAccountPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -30,6 +33,11 @@ public class MyAccountPage {
 	public String getUserName() {
 		log.info("Logged in user is: "+userName.getText());
 		return userName.getText().trim();
+	}
+	
+	public void logout() {
+		logoutButton.click();
+		log.info("Clicked on Logout Button");
 	}
 
 }
