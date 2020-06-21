@@ -1,6 +1,6 @@
 package com.automationpractice.stepdefinitions;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,22 +52,20 @@ public class CreateAccoutStepDefinition {
 	public void i_enter_valid_details_and_register_the_user(String dataKey) {
 	   JsonReader json = new JsonReader();
 	   CreateAccount createAccount = json.getpageByFirstName(dataKey);
-	   Assert.assertEquals("email used for registering did not match", TestScenario.getSession().getVariable("email"), createAccountPage.getEmailUsedForRegistering());
+	   assertEquals("email used for registering did not match", TestScenario.getSession().getVariable("email"), createAccountPage.getEmailUsedForRegistering());
 	   TestScenario.getSession().setVariable("userName", createAccount.createNewAccount.firstName+" "+createAccount.createNewAccount.lastName);
 	   createAccountPage.createAccount(createAccount);
 	}
 
 	@Then("^I should be navigated to (.*) screen$")
 	public void i_should_be_navigated_to_screen(String pageTitle) {
-		Assert.assertEquals("Page heading is Not correct", pageTitle.toUpperCase(), myAccountPage.getPageHeading());
-		//Assert.assertEquals("User Name is Not correct", TestScenario.getSession().getVariable("userName"), myAccountPage.getUserName());
+		assertEquals("Page heading is Not correct", pageTitle.toUpperCase(), myAccountPage.getPageHeading());		
 		log.info("Page Title is: "+driver.getTitle());
-		//Assert.assertTrue("Page Title is Not correct", driver.getTitle().contains(pageTitle));
-	    log.info("User is in My Accounts screen");
 	}	
 	
 	@When("I logout of application")
 	public void iLogoutOfApplication() {
 		myAccountPage.logout();
+		assertTrue("Logout was not successfull", homePage.isSignInLinkDisplayed());
 	}
 }

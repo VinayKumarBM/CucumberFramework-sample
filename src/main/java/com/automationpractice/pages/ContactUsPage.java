@@ -38,9 +38,6 @@ public class ContactUsPage {
 	@FindBy(id = "submitMessage")
 	private WebElement sendButton;
 	
-	@FindBy(css = "p.alert-success")
-	private WebElement successText;
-	
 	public ContactUsPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 		this.driver = driver;
@@ -66,12 +63,5 @@ public class ContactUsPage {
 	public void sendMessage() {
 		sendButton.click();
 		log.info("Clicked on send message button");
-	}
-	
-	public String getSuccessMessage() {
-		eo.waitForVisibilityOfElement(successText);
-		String msg = successText.getText();
-		log.info("Message: "+msg);
-		return msg;
-	}
+	}	
 }

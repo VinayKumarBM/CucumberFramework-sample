@@ -1,9 +1,9 @@
 package com.automationpractice.stepdefinitions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.automationpractice.pages.CheckoutPage;
 import com.automationpractice.pages.LandingPage;
@@ -15,7 +15,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CheckoutProductStepDefinition {
-	private static final Logger log = LoggerFactory.getLogger(CheckoutProductStepDefinition.class);
 	private WebDriver driver;
 	private LandingPage landingPage;	
 	private LoginPage loginPage;	
