@@ -17,7 +17,6 @@ public class TestScenario {
 
     public static TestScenario getSession() {
     	if(scenario == null) {
-    		System.out.println("Scenario is null");
     		synchronized (TestScenario.class) 
     		{ 
     			if(scenario==null) 

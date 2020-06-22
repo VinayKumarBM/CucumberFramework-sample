@@ -1,5 +1,6 @@
 package com.automationpractice.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,13 +13,18 @@ public class MyAccountPage {
 	private WebDriver driver;
 	
 	@FindBy(css = ".page-heading")
-	WebElement pageHeading;
+	private WebElement pageHeading;
 
 	@FindBy(css = "a.account>span")
-	WebElement userName;
+	private WebElement userName;
 	
 	@FindBy(css = ".logout")
-	WebElement logoutButton;
+	private WebElement logoutButton;
+	
+	@FindBy(css = "a[title='View my customer account']>span")
+	private WebElement myAccountLink;
+
+	private final String myAccountPagesXpath = "//span[text()='%s']";
 	
 	public MyAccountPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -39,5 +45,14 @@ public class MyAccountPage {
 		logoutButton.click();
 		log.info("Clicked on Logout Button");
 	}
+	
+	public void navigateToMyAccount() {
+		myAccountLink.click();
+		log.info("Navigated to My Account page");
+	}
 
+	public void navigateToPageInMyAccount(String page) {
+		driver.findElement(By.xpath(String.format(myAccountPagesXpath, page))).click();
+		log.info("Navigate to "+page+" page");
+	}
 }

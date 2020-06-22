@@ -240,4 +240,8 @@ public class ElementOperations {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).doubleClick().build().perform();
 	}
+	
+	public void refreshPage() {
+		driver.navigate().refresh();
+	}
 }

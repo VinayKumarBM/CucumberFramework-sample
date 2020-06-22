@@ -63,7 +63,7 @@ public class ProductDetailsPage {
 	
 	@FindBy(css = ".fancybox-error")
 	private WebElement addToWishlistMessage;
-	//Added to your wishlist.
+
 	@FindBy(css = ".fancybox-close")
 	private WebElement closeDialogBox;
 	

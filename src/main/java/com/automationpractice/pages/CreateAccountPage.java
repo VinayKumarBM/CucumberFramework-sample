@@ -21,43 +21,43 @@ public class CreateAccountPage {
 	}
 
 	@FindBy(id = "id_gender1")
-	WebElement title;
+	private WebElement title;
 	
 	@FindBy(id = "customer_firstname")
-	WebElement firstName;
+	private WebElement firstName;
 	
 	@FindBy(id = "customer_lastname")
-	WebElement lastName;
+	private WebElement lastName;
 	
 	@FindBy(id = "email")
-	WebElement email;
+	private WebElement email;
 	
 	@FindBy(id = "passwd")
-	WebElement password;
+	private WebElement password;
 	
 	@FindBy(id = "address1")
-	WebElement address;
+	private WebElement address;
 	
 	@FindBy(id = "city")
-	WebElement city;
+	private WebElement city;
 	
 	@FindBy(id = "id_state")
-	WebElement state;
+	private WebElement state;
 	
 	@FindBy(id = "postcode")
-	WebElement zipCode;
+	private WebElement zipCode;
 	
 	@FindBy(id = "id_country")
-	WebElement country;
+	private WebElement country;
 	
 	@FindBy(id = "phone_mobile")
-	WebElement mobilePhone;
+	private WebElement mobilePhone;
 	
 	@FindBy(id = "alias")
-	WebElement aliasAddress;
+	private WebElement aliasAddress;
 	
 	@FindBy(id = "submitAccount")
-	WebElement register_button;
+	private WebElement register_button;
 	
 	public void enterFirstName(String firstName) {
 		this.firstName.sendKeys(firstName);

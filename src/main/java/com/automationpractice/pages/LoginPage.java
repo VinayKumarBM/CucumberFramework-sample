@@ -12,19 +12,19 @@ public class LoginPage {
 	private WebDriver driver;
 	
 	@FindBy(name = "email_create")
-	WebElement createAccountEmail;
+	private WebElement createAccountEmail;
 	
 	@FindBy(name ="SubmitCreate")
-	WebElement createAccount_Button;
+	private WebElement createAccount_Button;
 	
 	@FindBy(name ="email")
-	WebElement registeredEmail;
+	private WebElement registeredEmail;
 	
 	@FindBy(name ="passwd")
-	WebElement password;
+	private WebElement password;
 	
 	@FindBy(name ="SubmitLogin")
-	WebElement login_Button;
+	private WebElement login_Button;
 	
 	public LoginPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
