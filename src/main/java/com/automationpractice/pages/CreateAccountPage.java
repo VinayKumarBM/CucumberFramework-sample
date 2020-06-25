@@ -59,6 +59,30 @@ public class CreateAccountPage {
 	@FindBy(id = "submitAccount")
 	private WebElement register_button;
 	
+	@FindBy(id = "days")
+	private WebElement days_dropdown;
+	
+	@FindBy(id = "months")
+	private WebElement months_dropdown;
+	
+	@FindBy(id = "years")
+	private WebElement years_dropdown;
+	
+	@FindBy(id = "old_passwd")
+	private WebElement oldPassword;
+	
+	@FindBy(id = "confirmation")
+	private WebElement confirmationPassword;
+	
+	@FindBy(id = "newsletter")
+	private WebElement newsletter_checkbox;
+	
+	@FindBy(id = "optin")
+	private WebElement specialOffers_checkbox;
+	
+	@FindBy(name = "submitIdentity")
+	private WebElement saveUpdate_button;
+	
 	public void enterFirstName(String firstName) {
 		this.firstName.sendKeys(firstName);
 	}
@@ -125,4 +149,32 @@ public class CreateAccountPage {
 		log.info("email ID used for registering: "+email.getAttribute("value"));
 		return email.getAttribute("value").trim();
 	}
+	
+	public void updateDateOfBirth(String dob) {
+		String date[] = dob.split("-");
+		new Select(days_dropdown).selectByValue(date[0]);
+		new Select(months_dropdown).selectByValue(date[1]);
+		new Select(years_dropdown).selectByValue(date[2]);
+		log.info("Updated the date: "+dob);
+	}
+	
+	public void updatePassword(String oldPassword, String newPassword) {		
+		this.oldPassword.sendKeys(oldPassword);
+		password.sendKeys(newPassword);
+		confirmationPassword.sendKeys(newPassword);
+		log.info("Updated password from "+oldPassword+" to "+newPassword);
+	}
+	
+	public void updateSubscriptions() {
+		newsletter_checkbox.click();
+		specialOffers_checkbox.click();
+		log.info("Opted for Newsletter: "+newsletter_checkbox.isSelected()+
+				"Special Offers: "+specialOffers_checkbox.isSelected());
+	}
+	
+	public void saveUpdates() {
+		saveUpdate_button.click();
+		log.info("Saved the personal information");
+	}
 }
+

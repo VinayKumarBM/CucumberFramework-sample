@@ -44,14 +44,3 @@ Feature: This is to test product details page feature
     Examples:
     |product				|friendName	|email			  |message									|
     |Printed Summer Dress	|Jane Doe 	|janedoe@gmail.com|Your e-mail has been sent successfully	|
-    
-  @addToWishlist
-  Scenario Outline: To add product to Wishlist when user is not logged in
-    Given I am on the application
-	When I search for items containing "<product>"
-	And I navigate to product details page of '<product>'
-	Then I should see '<message>' on adding product to wishlist
-	
-    Examples:
-    |product				|message										|
-    |Printed Summer Dress	|You must be logged in to manage your wishlist.	|  

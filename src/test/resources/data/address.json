@@ -1,0 +1,36 @@
+[
+	{
+		"newAddress": {
+			"firstName": "James",
+			"lastName": "Bond",
+			"company": "Secret Service",
+			"addressLine1": "30 Wellington Square",
+			"addressLine2": "",
+			"city": "London",
+			"state": "New Hampshire",
+			"zipCode": "69007",
+			"country": "United States",
+			"homePhone": "",
+			"mobilePhone": "1007007007",
+			"additionalInformation": "",
+			"addressReference": "NEW ADDRESS"			
+		},
+		
+		"otherAddress": {
+			"firstName": "Jane",
+			"lastName": "Doe",
+			"company": "Anonymous",
+			"addressLine1": "Anonymous address line 1",
+			"addressLine2": "Anonymous address line 2",
+			"city": "Manchester",
+			"state": "New Hampshire",
+			"zipCode": "74961",
+			"country": "United States",
+			"homePhone": "9876543210",
+			"mobilePhone": "9087654321",
+			"additionalInformation": "Adding secondary address",
+			"addressReference": "ANOTHER ADDRESS"			
+		}
+		
+	}
+]

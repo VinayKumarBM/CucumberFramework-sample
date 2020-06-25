@@ -58,4 +58,14 @@ public class WishlistStepDefinition {
 		eo.refreshPage();
 		assertEquals("Wishlist product count did not match", 0, wishlistPage.getWishlistProductCount());
 	}
+	
+	@When("I return back to Home page")
+	public void backToHomePage() {
+	   myAccountPage.clickHomeButton();
+	}
+	
+	@When("I return back to My Account page")
+	public void backToMyAccount() {
+		myAccountPage.clickBackToYourAccountButton();
+	}
 }

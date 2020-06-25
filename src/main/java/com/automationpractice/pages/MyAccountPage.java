@@ -23,6 +23,12 @@ public class MyAccountPage {
 	
 	@FindBy(css = "a[title='View my customer account']>span")
 	private WebElement myAccountLink;
+	
+	@FindBy(xpath = "//li[1]/a[contains(@class,'button')]/span")
+	private WebElement backToMyAccountButton;
+	
+	@FindBy(xpath = "//li[2]/a[contains(@class,'button')]/span")
+	private WebElement homeButton;
 
 	private final String myAccountPagesXpath = "//span[text()='%s']";
 	
@@ -54,5 +60,15 @@ public class MyAccountPage {
 	public void navigateToPageInMyAccount(String page) {
 		driver.findElement(By.xpath(String.format(myAccountPagesXpath, page))).click();
 		log.info("Navigate to "+page+" page");
+	}
+	
+	public void clickBackToYourAccountButton() {
+		backToMyAccountButton.click();
+		log.info("Clicked on Back to Your Account button");
+	}
+	
+	public void clickHomeButton() {
+		homeButton.click();
+		log.info("Clicked on Home button");
 	}
 }

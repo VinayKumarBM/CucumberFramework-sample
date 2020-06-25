@@ -68,4 +68,24 @@ public class CreateAccoutStepDefinition {
 		myAccountPage.logout();
 		assertTrue("Logout was not successfull", homePage.isSignInLinkDisplayed());
 	}
+	
+	@When("I update the password from {string} to {string}")
+	public void iUpdateThePasswordFromTestToTest(String oldPassword, String newPassword) {
+		createAccountPage.updatePassword(oldPassword, newPassword);
+	}
+
+	@When("I update date of birth to {string}")
+	public void iUpdateDateOfBirthTo(String dob) {
+		createAccountPage.updateDateOfBirth(dob);
+	}
+
+	@When("I update Newsletter & Special offers subscriptions")
+	public void iUpdateNewsletterSpecialOffersSubscriptions() {
+		createAccountPage.updateSubscriptions();
+	}
+
+	@When("I update the personal information")
+	public void iUpdateThePersonalInformation() {
+		createAccountPage.saveUpdates();
+	}
 }
