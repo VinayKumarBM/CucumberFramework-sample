@@ -61,9 +61,10 @@ public class DriverManager {
 		case CHROME : 
 			WebDriverManager.chromedriver().arch32().setup();
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-infobars;");
-			options.setAcceptInsecureCerts(true);
-			options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+			options.addArguments("start-maximized");	
+			options.addArguments("disable-infobars");
+			//options.setAcceptInsecureCerts(true);
+			//options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 			driver = new ChromeDriver(options);
 			break;
 		case INTERNETEXPLORER : 
