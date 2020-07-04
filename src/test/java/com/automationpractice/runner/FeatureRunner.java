@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.framework.utilities.GetConfig;
 import com.rajatthareja.reportbuilder.Color;
@@ -29,10 +29,10 @@ import cucumber.api.junit.Cucumber;
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
         //dryRun = true,
-        tags = {"@testApp"}	
+        tags = {"@writeReview"}	
 		)
 public class FeatureRunner {
-	private static final Log log = LogFactory.getLog(FeatureRunner.class);
+	private static final Logger log = LoggerFactory.getLogger(FeatureRunner.class);
 	
 	@AfterClass
 	public static void generateHTMLReport() {
