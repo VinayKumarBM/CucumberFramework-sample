@@ -29,7 +29,7 @@ import cucumber.api.junit.Cucumber;
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
         //dryRun = true,
-        tags = {"@address"}	
+        tags = {"@testApp"}	
 		)
 public class FeatureRunner {
 	private static final Log log = LogFactory.getLog(FeatureRunner.class);

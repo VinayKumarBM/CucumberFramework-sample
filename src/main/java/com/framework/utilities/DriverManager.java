@@ -2,14 +2,13 @@ package com.framework.utilities;
 
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cucumber.api.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -63,8 +62,6 @@ public class DriverManager {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized");	
 			options.addArguments("disable-infobars");
-			//options.setAcceptInsecureCerts(true);
-			//options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 			driver = new ChromeDriver(options);
 			break;
 		case INTERNETEXPLORER : 
@@ -75,7 +72,7 @@ public class DriverManager {
 		//		String[] sourceTag = scenario.getSourceTagNames().toArray(new String[0]);
 		//		eyes.open(driver, sourceTag[0], scenario.getName());
 		tDriver.set(driver);
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Long.parseLong(GetConfig.getConfigProperty("implicitWaitTime")), TimeUnit.SECONDS);
 		return driver;
 	}

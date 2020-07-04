@@ -32,11 +32,17 @@ public class CheckoutPage {
 	@FindBy(css = "a[title='Pay by check.']")
 	private WebElement payByCheckButton;
 	
+	@FindBy(css = "a[title='Pay by bank wire']")
+	private WebElement payByBankWireButton;
+	
 	@FindBy(xpath = "//span[text()='I confirm my order']")
 	private WebElement confirmOrderButton;
 	
 	@FindBy(css = "p.alert-success")
 	private WebElement successText;
+	
+	@FindBy(css = ".cheque-indent>strong")
+	private WebElement wirePaymentSuccessText;
 	
 	public CheckoutPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -87,6 +93,19 @@ public class CheckoutPage {
 	public String getSuccessMessage() {
 		eo.waitForVisibilityOfElement(successText);
 		String msg = successText.getText();
+		log.info("Message: "+msg);
+		return msg;
+	}
+	
+	public void payByBankWire() {
+		eo.waitForElementToBeClickable(payByBankWireButton);
+		payByBankWireButton.click();
+		log.info("Clicked on Pay By Bank Wire Button");
+	}
+	
+	public String getWirePaymentSuccessMessage() {
+		eo.waitForVisibilityOfElement(wirePaymentSuccessText);
+		String msg = wirePaymentSuccessText.getText();
 		log.info("Message: "+msg);
 		return msg;
 	}

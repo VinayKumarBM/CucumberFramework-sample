@@ -15,9 +15,9 @@ Feature: This is to test address update feature
 	And I logout of application
 	
     Examples:
-    |userName			|password |addressReference	|message												 |
-    |test321@yahoo.com	|test321  |NEW ADDRESS		|Your personal information has been successfully updated.|
-#   |test321@yahoo.com	|test321  |ANOTHER ADDRESS	|Your personal information has been successfully updated.|
+   |userName			|password |addressReference	|
+   |test321@yahoo.com	|test321  |NEW ADDRESS		|
+   |test321@yahoo.com	|test321  |ANOTHER ADDRESS	|
 
   @updateAddress
   Scenario Outline: To update a secondary address

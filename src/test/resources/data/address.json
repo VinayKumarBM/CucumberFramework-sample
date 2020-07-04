@@ -14,9 +14,10 @@
 			"mobilePhone": "1007007007",
 			"additionalInformation": "",
 			"addressReference": "NEW ADDRESS"			
-		},
-		
-		"otherAddress": {
+		}
+	},
+	{
+		"newAddress": {
 			"firstName": "Jane",
 			"lastName": "Doe",
 			"company": "Anonymous",
@@ -30,7 +31,6 @@
 			"mobilePhone": "9087654321",
 			"additionalInformation": "Adding secondary address",
 			"addressReference": "ANOTHER ADDRESS"			
-		}
-		
+		}		
 	}
 ]

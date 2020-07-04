@@ -1,7 +1,6 @@
 package com.automationpractice.stepdefinitions;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.openqa.selenium.WebDriver;
 
@@ -72,4 +71,20 @@ public class CheckoutProductStepDefinition {
 		assertEquals("Order Confirmation was not displayed", msg, checkoutPage.getSuccessMessage());
 	}
 	
+	@When("I verify that product is in cart")
+	public void iVerifyThatProductIsAddedToCart() {
+		assertNotNull("Product is not in cart", checkoutPage.getProductInCart());
+		checkoutPage.proceedToCheckoutFromSummary();
+	}
+	
+	@When("I confirm oredr by paying through bank wire")
+	public void iConfirmOredrByPayingThroughBankWire() {
+		checkoutPage.payByBankWire();
+		checkoutPage.confirmOrder();
+	}
+	
+	@Then("I verify that order is placed through bank wire sucessfully {string}")
+	public void iVerifyThatOrderIsPlacedThroughBankWireSucessfully(String msg) {
+		assertEquals("Order Confirmation was not displayed", msg, checkoutPage.getWirePaymentSuccessMessage());
+	}
 }
