@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.WebDriver;
 
+import com.automationpractice.helper.JsonReader;
+import com.automationpractice.helper.StringUtility;
+import com.automationpractice.models.Address;
+import com.automationpractice.pages.AddressPage;
 import com.automationpractice.pages.CheckoutPage;
 import com.automationpractice.pages.LandingPage;
 import com.automationpractice.pages.LoginPage;
@@ -19,13 +23,17 @@ public class CheckoutProductStepDefinition {
 	private LoginPage loginPage;	
 	private ProductDetailsPage productDetailsPage;	
 	private CheckoutPage checkoutPage;
+	private AddressPage addressPage;
+	private JsonReader json = new JsonReader();
+	private Address address;
 
 	public CheckoutProductStepDefinition() {
 		driver = DriverManager.getInstance().getDriver();
 		landingPage = new LandingPage(driver);
 		loginPage = new LoginPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
-		checkoutPage = new CheckoutPage(driver);		
+		checkoutPage = new CheckoutPage(driver);	
+		addressPage = new AddressPage(driver);
 	}
 
 	@When("I login into application with (.*), (.*)")
@@ -50,6 +58,7 @@ public class CheckoutProductStepDefinition {
 
 	@When("I use the delivery address as the billing address")
 	public void iUseTheDeliveryAddressAsTheBillingAddress() {
+		checkoutPage.useDeliverAddressAsBillingAddress(true);
 		assertTrue("Delivery Address is not same as Billing Address", checkoutPage.isDeliverAddressSameAsBillingAddress());
 		checkoutPage.proceedToCheckout();
 	}
@@ -86,5 +95,32 @@ public class CheckoutProductStepDefinition {
 	@Then("I verify that order is placed through bank wire sucessfully {string}")
 	public void iVerifyThatOrderIsPlacedThroughBankWireSucessfully(String msg) {
 		assertEquals("Order Confirmation was not displayed", msg, checkoutPage.getWirePaymentSuccessMessage());
+	}
+	
+	@When("I add a comment about my order {string}")
+	public void iAddACommentAboutMyOrder(String comment) {
+	    checkoutPage.addComment(comment);
+	}
+
+	@When("I add new address {string} to use as the billing address")
+	public void iAddNewAddressToUseAsTheBillingAddress(String addressReference) {
+		checkoutPage.addNewAddress();
+		address = json.getAddressByReference(addressReference);
+		addressPage.addNewAddress(address);
+		String billingAddress = addressReference+StringUtility.getAlphaNumericString(5);
+		addressPage.enterReferenceAddress(billingAddress);
+		addressPage.clickSaveButton();
+		checkoutPage.useDeliverAddressAsBillingAddress(false);
+		checkoutPage.selectBillingAddress(billingAddress);
+	}
+	
+	@Then("I proceed to shipping details of order")
+	public void iProceedToShippingDetailsOfOrder() {
+		checkoutPage.proceedToCheckout();
+	}
+	
+	@Then("I will go back to Order History screen")
+	public void iWillGoBackToOrderHistoryScreen() {
+		checkoutPage.clickBackToOrderLink();
 	}
 }

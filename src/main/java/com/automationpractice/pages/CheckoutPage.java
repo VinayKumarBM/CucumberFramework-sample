@@ -43,6 +43,21 @@ public class CheckoutPage {
 	
 	@FindBy(css = ".cheque-indent>strong")
 	private WebElement wirePaymentSuccessText;
+
+	@FindBy(id = "id_address_invoice")
+	private WebElement billingAddressDropdown;
+	
+	@FindBy(id = "id_address_delivery")
+	private WebElement deliveryAddressDropdown;
+	
+	@FindBy(css = "p.submit>a[title='Add']")
+	private WebElement addNewAddressButton;
+	
+	@FindBy(name = "message")
+	private WebElement messageTextarea;
+	
+	@FindBy(css = "p>a[title='Back to orders']")
+	private WebElement backToOrdersLink;
 	
 	public CheckoutPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -71,6 +86,15 @@ public class CheckoutPage {
 	
 	public boolean isDeliverAddressSameAsBillingAddress() {
 		return useBillingAddress.isSelected();
+	}
+	
+	public void useDeliverAddressAsBillingAddress(boolean checked) {
+		if((checked && !isDeliverAddressSameAsBillingAddress())||
+				(!checked && isDeliverAddressSameAsBillingAddress())){
+			useBillingAddress.click();
+			log.info("Is billing address same as delivery address: "+checked);
+			eo.pause(5);
+		}
 	}
 	
 	public void agreeToTermsAndService() {
@@ -108,5 +132,25 @@ public class CheckoutPage {
 		String msg = wirePaymentSuccessText.getText();
 		log.info("Message: "+msg);
 		return msg;
+	}
+	
+	public void addComment(String comment) {
+		messageTextarea.sendKeys(comment);
+		log.info("Added comment: "+comment);
+	}
+	
+	public void addNewAddress() {
+		addNewAddressButton.click();
+		log.info("Clicked on Add New Address button");
+	}
+	
+	public void selectBillingAddress(String billingAddress) {
+		eo.selectByVisibleText(billingAddressDropdown, billingAddress);
+		log.info("Selected new billing address "+billingAddress); 
+	}
+	
+	public void clickBackToOrderLink() {
+		backToOrdersLink.click();
+		log.info("Clicked on Back To Order Link");
 	}
 }

@@ -32,5 +32,22 @@
 			"additionalInformation": "Adding secondary address",
 			"addressReference": "ANOTHER ADDRESS"			
 		}		
+	},
+	{
+		"newAddress": {
+			"firstName": "Jane",
+			"lastName": "Doe",
+			"company": "Anonymous",
+			"addressLine1": "Anonymous address line 1",
+			"addressLine2": "Anonymous address line 2",
+			"city": "Manchester",
+			"state": "New Hampshire",
+			"zipCode": "74961",
+			"country": "United States",
+			"homePhone": "9876543210",
+			"mobilePhone": "9087654321",
+			"additionalInformation": "Adding secondary address",
+			"addressReference": "BILLING ADDRESS"			
+		}		
 	}
 ]

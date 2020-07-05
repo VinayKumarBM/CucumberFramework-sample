@@ -29,7 +29,7 @@ import cucumber.api.junit.Cucumber;
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
         //dryRun = true,
-        tags = {"@writeReview"}	
+        tags = {"@checkoutProduct"}	
 		)
 public class FeatureRunner {
 	private static final Logger log = LoggerFactory.getLogger(FeatureRunner.class);
