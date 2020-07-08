@@ -42,7 +42,7 @@ public class ProductDetailsPageStepDefinition {
 	    assertEquals("Success message did not match", message, pdp.getSuccessMessage());
 	}
 
-	@Then("I verify social media links on PDP")
+	@Then("I verify social media links available")
 	public void iVerifySocialMediaLinks(DataTable dataTable) {
 		Map<String, String> expected = dataTable.asMap(String.class, String.class);
 		Map<String, String> actual =pdp.getSocialMediaLinks();
@@ -66,5 +66,29 @@ public class ProductDetailsPageStepDefinition {
 	public void iShouldSeeMessageOnAddingProductToWishlist(String message) {
 		pdp.clickAddToWishlistLink();
 		assertEquals("Wishlist message did not match",message, pdp.getAddToWishlistMessage());
+	}
+	
+	@When("I change the product view to {string}")
+	public void iChangeTheProductViewTo(String view) {
+		plp.changeView(view);
+	}
+	
+	@When("I add {int} product to compare")
+	public void iAddProductToCompare(int count) {
+		assertFalse("Compare button is enabled ",plp.isCompareButtonEnabled());
+		plp.addProductsToCompare(count);
+		assertTrue("Compare button is disabled ",plp.isCompareButtonEnabled());
+		assertEquals("Product count to compare did not match", count, plp.getCompareProductCount());		
+	}
+	
+	@Then("I compare added products")
+	public void iCompareAddedProducts() {
+		plp.clickCompareButton();
+	}
+	
+	@Then("I remove {int} from {int} products that were added")
+	public void iRemoveFromProductsThatWereAdded(Integer removeCount, Integer addCount) {
+		plp.removeProductsFromCompare(removeCount);
+		assertEquals("Product count to compare did not match", addCount-removeCount, plp.getCompareProductCount());	
 	}
 }

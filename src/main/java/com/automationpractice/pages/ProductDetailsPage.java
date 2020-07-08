@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.automationpractice.helper.ElementOperations;
+import com.automationpractice.helper.StringUtility;
 
 public class ProductDetailsPage {
 	private static final Logger log = LoggerFactory.getLogger(ProductDetailsPage.class);
@@ -66,6 +67,21 @@ public class ProductDetailsPage {
 
 	@FindBy(css = ".fancybox-close")
 	private WebElement closeDialogBox;
+	
+	@FindBy(xpath = "//h1[@itemprop='name']")
+	private WebElement productText;
+	
+	@FindBy(id = "our_price_display")
+	private WebElement productPrice;
+	
+	@FindBy(css = "div#layer_cart h2")
+	private WebElement productAddedSuccessText;
+	
+	@FindBy(css = ".layer_cart_product_info .product-name")
+	private WebElement productInCartNameText;
+	
+	@FindBy(id = "layer_cart_product_price")
+	private WebElement productInCartPriceText;
 	
 	private final String socialMediaXpath = "//p[contains(@class,'socialsharing_product')]//button[%s]";
 	
@@ -161,5 +177,31 @@ public class ProductDetailsPage {
 		closeDialogBox.click();
 		log.info("Closed the message box");
 		return msg;
+	}
+	
+	public String getNameOfProduct() {
+		log.info("Product Name: "+productText.getText());
+		return productText.getText().trim();
+	}
+	
+	public float getProductPrice() {
+		log.info("Product Price: "+productPrice.getText());
+		return StringUtility.getPriceFromString(productPrice.getText().trim());
+	}
+	
+	public String getProductAddedSuccessMessage() {
+		eo.waitForVisibilityOfElement(productAddedSuccessText);
+		log.info(productAddedSuccessText.getText());
+		return productAddedSuccessText.getText();
+	}
+	
+	public String getNameOfProductInCart() {
+		log.info("Product Name: "+productInCartNameText.getText());
+		return productInCartNameText.getText().trim();
+	}
+	
+	public float getProductPriceInCart() {
+		log.info("Product Price: "+productInCartPriceText.getText());
+		return StringUtility.getPriceFromString(productInCartPriceText.getText().trim());
 	}
 }

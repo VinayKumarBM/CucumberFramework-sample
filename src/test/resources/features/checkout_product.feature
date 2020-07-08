@@ -41,7 +41,7 @@ Feature: This is to test product checkout feature
     |test321@yahoo.com	|test321	|Printed Summer Dress	|Your order on My Store is complete.|
     
   @wireLoginAndcheckout
-  Scenario Outline: Login and checkout the product and place order
+  Scenario Outline: Login and checkout the product and place order by paying from wire
     Given I am on the application
     When I navigate to Login Page by clicking on Sign In button
 	And I login into application with <userName>, <password>
