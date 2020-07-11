@@ -20,34 +20,16 @@ public class JsonReader {
     private BufferedReader bufferedReader = null;
 
     public JsonReader() { 
-        createAccountList = getBasicCreateAccountData();
-        addressList = getAddressData();
+        createAccountList = getDataFromJSON(createAccountPath, CreateAccount[].class);
+        addressList = getDataFromJSON(addressPath, Address[].class);
     }
 
-    private List<CreateAccount> getBasicCreateAccountData() {
+    private <T> List<T> getDataFromJSON(String jsonPath, Class<T[]> classOfT) {
         try {
-            bufferedReader = new BufferedReader(new FileReader(createAccountPath));
-            CreateAccount[] leads = gson.fromJson(bufferedReader, CreateAccount[].class);
-            return Arrays.asList(leads);
+            bufferedReader = new BufferedReader(new FileReader(jsonPath));
+            return Arrays.asList(gson.fromJson(bufferedReader, classOfT));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Create Account date file not found at path:" + createAccountPath);
-        } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-            } catch (IOException e) {
-            }
-        }
-    }
-
-    private List<Address> getAddressData() {
-        try {
-            bufferedReader = new BufferedReader(new FileReader(addressPath));
-            Address[] leads = gson.fromJson(bufferedReader, Address[].class);
-            return Arrays.asList(leads);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Address date file not found at path:" + addressPath);
+            throw new RuntimeException("File not found at path:" + addressPath);
         } finally {
             try {
                 if (bufferedReader != null) {
