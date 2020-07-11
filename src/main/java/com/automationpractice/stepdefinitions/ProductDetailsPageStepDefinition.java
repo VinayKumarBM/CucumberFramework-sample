@@ -1,6 +1,8 @@
 package com.automationpractice.stepdefinitions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import com.automationpractice.pages.LandingPage;
 import com.automationpractice.pages.ProductDetailsPage;
 import com.framework.utilities.DriverManager;
+import com.framework.utilities.TestScenario;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -91,4 +94,53 @@ public class ProductDetailsPageStepDefinition {
 		plp.removeProductsFromCompare(removeCount);
 		assertEquals("Product count to compare did not match", addCount-removeCount, plp.getCompareProductCount());	
 	}
+	
+	@When("I enter the product quantity {string}")
+	public void iEnterTheProductQuantity(String quantity) {		
+	    pdp.enterQuantity(quantity);
+	    assertEquals("Quanity did not match", quantity, String.valueOf(pdp.getQuantity()));
+	}
+
+	@When("I decrease the product quantity by {int}")
+	public void iDecreaseTheProductQuantityBy(int decrease) {
+	    int expectedQuantity = pdp.getQuantity() - decrease;
+	    for (int i = 0; i < decrease; i++) {
+			pdp.decrementQuantityByOne();
+		}
+	    assertEquals("Quanity did not match", expectedQuantity, pdp.getQuantity());
+	}
+
+	@When("I increase the product quantity by {int}")
+	public void iIncreaseTheProductQuantityBy(Integer increase) {
+	    int expectedQuantity = pdp.getQuantity() + increase;
+	    for (int i = 0; i < increase; i++) {
+			pdp.incrementQuantityByOne();
+		}
+	    assertEquals("Quanity did not match", expectedQuantity, pdp.getQuantity());
+	}
+
+	@When("I select size as {string} and color as {string}")
+	public void iSelectSizeAsAndColorAs(String size, String color) {
+	    pdp.selectColor(color);
+	    pdp.selectSize(size);
+	}
+
+	@Then("I validate the details like color {string} size {string}after adding product {string} to cart")
+	public void iValidateTheDetailsLikeColorSizeAfterAddingProductToCart(String color, String size, String product) {
+		int expectedQuantity = pdp.getQuantity();
+		float total = expectedQuantity * pdp.getProductPrice();
+		pdp.addToCart();
+		assertEquals("Product Quantity did not match: ", String.valueOf(expectedQuantity), pdp.getNumberOfQuantityText());
+		assertEquals("Product Name did not match: ", product, pdp.getNameOfProductInCart());
+		assertEquals("Product attributes did not match: ", color+", "+size, pdp.getProductAttributes());
+		assertEquals("Product Quantity did not match: ", String.valueOf(expectedQuantity), pdp.getQuantityText());		
+		assertEquals("Product Total did not match: ", total, pdp.getProductPriceInCart(), 0.00);
+		TestScenario.getSession().setVariable("productPrice", total);
+		TestScenario.getSession().setVariable("quantity", expectedQuantity);
+	}
+	
+	@Then("I checout product in cart")
+	public void iChecoutProductInCart() {
+	    pdp.proceedToCheckout();
+	}	
 }

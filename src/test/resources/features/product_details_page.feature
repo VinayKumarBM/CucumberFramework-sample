@@ -43,3 +43,22 @@ Feature: This is to test product details page feature
     Examples: 
       | product              | friendName | email             | message                                |
       | Printed Summer Dress | Jane Doe   | janedoe@gmail.com | Your e-mail has been sent successfully |
+      
+  @productCart
+  Scenario Outline: To validate product details after adding to cart
+    Given I am on the application
+    When I search for items containing "<product>"
+    And I navigate to product details page of '<product>'
+    And I enter the product quantity '<quantity>'
+    And I decrease the product quantity by <decrement>
+    And I increase the product quantity by <increment>
+    And I select size as '<size>' and color as '<color>'
+    Then I validate the details like color '<color>' size '<size>'after adding product '<product>' to cart
+    And I checout product in cart
+		And I validate the details like color '<color>' size '<size>' of product '<product>' in checkout page
+		And I remove product from checkout page
+		And I verify that message '<message>' is displayed
+		 
+    Examples: 
+      | product              | quantity | decrement| increment  |size	|color	|message											|
+      | Printed Summer Dress | 5   			| 2 			 | 1					|L		|Orange	|Your shopping cart is empty.	|    

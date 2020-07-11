@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.automationpractice.helper.ElementOperations;
+import com.automationpractice.helper.StringUtility;
 
 public class CheckoutPage {
 	private static final Logger log = LoggerFactory.getLogger(CheckoutPage.class);
@@ -58,6 +59,18 @@ public class CheckoutPage {
 	
 	@FindBy(css = "p>a[title='Back to orders']")
 	private WebElement backToOrdersLink;
+	
+	@FindBy(css = "td.cart_description>small>a")
+	private WebElement productAttributeText;
+	
+	@FindBy(css = ".cart_total span,price")
+	private WebElement totalText;
+	
+	@FindBy(css = ".cart_quantity_input")
+	private WebElement quantityInputbox;
+	
+	@FindBy(css = ".cart_quantity_delete")
+	private WebElement deleteButton;
 	
 	public CheckoutPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -152,5 +165,28 @@ public class CheckoutPage {
 	public void clickBackToOrderLink() {
 		backToOrdersLink.click();
 		log.info("Clicked on Back To Order Link");
+	}
+
+	public String getProductAttributes() {
+		String attribute = productAttributeText.getText().trim();
+		log.info("Product Attribute: "+attribute);
+		return attribute;
+	}
+
+	public String getQuantity() {
+		String quantity = quantityInputbox.getAttribute("value");
+		log.info("Product in Checkout page: "+quantity);
+		return quantity;
+	}
+
+	public float getProductTotalPrice() {
+		float total = StringUtility.getPriceFromString(totalText.getText());
+		log.info("Product Total: "+total);
+		return total;
+	}
+	
+	public void removeProduct() {
+		deleteButton.click();
+		log.info("Clicked on Delete button");
 	}
 }

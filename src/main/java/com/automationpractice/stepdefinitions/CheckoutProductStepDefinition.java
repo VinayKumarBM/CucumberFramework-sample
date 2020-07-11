@@ -13,6 +13,7 @@ import com.automationpractice.pages.LandingPage;
 import com.automationpractice.pages.LoginPage;
 import com.automationpractice.pages.ProductDetailsPage;
 import com.framework.utilities.DriverManager;
+import com.framework.utilities.TestScenario;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -122,5 +123,20 @@ public class CheckoutProductStepDefinition {
 	@Then("I will go back to Order History screen")
 	public void iWillGoBackToOrderHistoryScreen() {
 		checkoutPage.clickBackToOrderLink();
+	}
+	
+	@Then("I validate the details like color {string} size {string} of product {string} in checkout page")
+	public void iValidateTheDetailsLikeColorSizeOfProductInCheckoutPage(String color, String size, String product) {
+		assertEquals("Product Name did not match: ", product, checkoutPage.getProductInCart());
+		assertEquals("Product attributes did not match: ", "Color : "+color+", Size : "+size, checkoutPage.getProductAttributes());
+		assertEquals("Product Quantity did not match: ", String.valueOf(TestScenario.getSession().getVariable("quantity")), 
+				checkoutPage.getQuantity());		
+		assertEquals("Product Total did not match: ", (Float)TestScenario.getSession().getVariable("productPrice"), 
+				checkoutPage.getProductTotalPrice(), 0.00);
+	}
+	
+	@Then("I remove product from checkout page")
+	public void iRemoveProductInCheckoutPage() {
+		checkoutPage.removeProduct();
 	}
 }
