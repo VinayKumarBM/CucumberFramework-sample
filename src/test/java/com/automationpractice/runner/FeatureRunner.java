@@ -26,10 +26,11 @@ import cucumber.api.junit.Cucumber;
                 "json:target/generated-reports/CucumberTestReport.json",
                 "usage:target/generated-reports/cucumber-usage.json", 
                 "junit:target/generated-reports/cucumber-results.xml",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
         //dryRun = true,
-        tags = {"@differentBillingAddressCheckout or @wireDifferentBillingAddressCheckout"}	
+        tags = {"@testApp"}	
 		)
 public class FeatureRunner {
 	private static final Logger log = LoggerFactory.getLogger(FeatureRunner.class);
