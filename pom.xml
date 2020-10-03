@@ -84,6 +84,11 @@
 			<artifactId>extentreports-cucumber4-adapter</artifactId>
 			<version>1.0.7</version>
 		</dependency>
+		<dependency>
+    		<groupId>com.testautomationguru.pdfutil</groupId>
+    		<artifactId>pdf-util</artifactId>
+    		<version>0.0.3</version>
+		</dependency>		
 	</dependencies>
 
 	<build>

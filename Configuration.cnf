@@ -6,4 +6,5 @@ webdriverWaitTime=30
 
 base.url = http://automationpractice.com/index.php
 
-attachmentPath = /src/test/resources/data/attachment.txt        
+attachmentPath = /src/test/resources/data/attachment.txt
+downloadFilePath = \\src\\test\\resources\\download

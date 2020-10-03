@@ -1,11 +1,9 @@
 package com.framework.utilities;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,37 +29,7 @@ public class GetConfig {
             e.printStackTrace();
             System.exit(1);
         } finally {
-            return propertyValue;
+            return propertyValue.trim();
         }
-    }
-
-    public String getTitleFromLink (String property) {
-        Properties prop = new Properties();
-        String configFile = System.getProperty("user.dir") + "\\link_pagetitle_map.cnf";
-        InputStream input = null;
-        try {
-            input = new FileInputStream(configFile);
-            prop.load(input);
-            final String value = prop.getProperty(property);
-            return (value);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }
-    @Test
-    public void testGetTitle() {
-        final String link="Legal & Privacy";
-        GetConfig getConfig = new GetConfig();
-        final String title = getConfig.getTitleFromLink(link);
-        System.out.println(title);
     }
 }

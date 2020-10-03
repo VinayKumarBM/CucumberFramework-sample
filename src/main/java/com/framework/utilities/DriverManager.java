@@ -1,5 +1,6 @@
 package com.framework.utilities;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -59,9 +60,16 @@ public class DriverManager {
 			break;
 		case CHROME : 
 			WebDriverManager.chromedriver().arch32().setup();
+			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			chromePrefs.put("profile.default_content_settings.popups", 0);
+			chromePrefs.put("download.default_directory", 
+					System.getProperty("user.dir")+GetConfig.getConfigProperty("downloadFilePath"));
+			chromePrefs.put("download.prompt_for_download", false);
+			chromePrefs.put("plugins.plugins_disabled", "Chrome PDF Viewer");
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized");	
 			options.addArguments("disable-infobars");
+			options.setExperimentalOption("prefs", chromePrefs);
 			driver = new ChromeDriver(options);
 			break;
 		case INTERNETEXPLORER : 

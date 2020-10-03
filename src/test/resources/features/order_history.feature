@@ -64,3 +64,29 @@ Feature: This is to test Order history and details feature
     Examples: 
       | userName          | password | comment                          | message                   |
       | test321@yahoo.com | test321  | Wish you a very HAPPY BIRTHDAY!! | Message successfully sent |
+
+  @orderHistoryPDF
+  Scenario Outline: To verify PDF details on Order History
+    Given I am on the application
+    When I navigate to Login Page by clicking on Sign In button
+    And I login into application with <userName>, <password>
+    And I navigate to 'Order history and details' screen
+    Then I verify the details on pdf file in order history section
+    And I logout of application
+
+    Examples: 
+      | userName          | password |
+      | test321@yahoo.com | test321  |   
+      
+  @orderDetailsPDF
+  Scenario Outline: To verify PDF details on Order Details
+    Given I am on the application
+    When I navigate to Login Page by clicking on Sign In button
+    And I login into application with <userName>, <password>
+    And I navigate to 'Order history and details' screen
+    Then I verify the details on pdf file in order details section
+    And I logout of application
+
+    Examples: 
+      | userName          | password |
+      | test321@yahoo.com | test321  |         

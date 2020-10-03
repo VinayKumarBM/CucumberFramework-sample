@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.automationpractice.helper.PDFUtility;
 import com.framework.utilities.GetConfig;
 import com.rajatthareja.reportbuilder.Color;
 import com.rajatthareja.reportbuilder.ReportBuilder;
@@ -30,10 +32,15 @@ import cucumber.api.junit.Cucumber;
                 "rerun:target/generated-reports/rerun.txt"},
         snippets = SnippetType.CAMELCASE,
         //dryRun = true,
-        tags = {"@testApp"}	
+        tags = {"@orderHistory"}	
 		)
 public class FeatureRunner {
 	private static final Logger log = LoggerFactory.getLogger(FeatureRunner.class);
+	
+	@BeforeClass
+	public static void clearFiles() {
+		new PDFUtility().deleteFiles();
+	}
 	
 	@AfterClass
 	public static void generateHTMLReport() {

@@ -8,12 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.automationpractice.helper.ElementOperations;
+import com.automationpractice.helper.PDFUtility;
 import com.automationpractice.helper.StringUtility;
 
 public class OrderHistoryPage {
 	private static final Logger log = LoggerFactory.getLogger(OrderHistoryPage.class);
 	private WebDriver driver;
 	ElementOperations eo;
+	PDFUtility pdfUtility;
 	
 	@FindBy(name = "id_product")
 	private WebElement productDropdown;
@@ -38,6 +40,9 @@ public class OrderHistoryPage {
 	
 	@FindBy(css = ".history_method")
 	private WebElement orderHistoryPaymentText;
+	
+	@FindBy(css = ".history_invoice>a")
+	private WebElement invoicePDFLink;
 	
 	@FindBy(css = ".history_state>span")
 	private WebElement orderHistoryStatusText;
@@ -69,6 +74,12 @@ public class OrderHistoryPage {
 	@FindBy(css = ".return_quantity")
 	private WebElement quantityText;
 	
+	@FindBy(css = ".item .bold label")
+	private WebElement productText;
+	
+	@FindBy(css = ".item>td>label")
+	private WebElement referenceText;
+	
 	@FindBy(css = "div#order-detail-content .item td:nth-child(4)")
 	private WebElement unitPriceText;
 	
@@ -84,10 +95,14 @@ public class OrderHistoryPage {
 	@FindBy(css = ".totalprice td:nth-child(2)")
 	private WebElement totalText;
 	
+	@FindBy(css = ".info-order.box a")
+	private WebElement downloadInvoiceAsPDFLink;
+	
 	public OrderHistoryPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 		this.driver = driver;
 		eo = new ElementOperations(driver);
+		pdfUtility = new PDFUtility();
 	}
 
 	public String getOrderHistoryReference() {
@@ -190,6 +205,18 @@ public class OrderHistoryPage {
 		return savedComment;
 	}
 	
+	public String getProductName() {
+		String productName = productText.getText().trim();
+		log.info("Product Name: "+productName);
+		return productName;
+	}
+	
+	public String getProductReference() {
+		String reference = referenceText.getText().trim();
+		log.info("Reference: "+reference);
+		return reference;
+	}
+	
 	public String getDeliveryAddress() {
 		eo.scrollToElement(deliveryAddressText);
 		String deliveryAddress = deliveryAddressText.getText();
@@ -212,5 +239,17 @@ public class OrderHistoryPage {
 	public void reorderFromOrderDetails() {
 		reorderButton.click();
 		log.info("Clicked on Reorder button");
+	}
+	
+	public String clickOrderHistoryInvoicePDF() throws Exception {
+		invoicePDFLink.click();
+		log.info("Clicked on PDF link on Order History");
+		return pdfUtility.waitForFileDownload();
+	}
+	
+	public String clickOrderDetailsInvoicePDF() throws Exception {
+		downloadInvoiceAsPDFLink.click();
+		log.info("Clicked on Download your invoice as a PDF file link");
+		return pdfUtility.waitForFileDownload();
 	}
 }
