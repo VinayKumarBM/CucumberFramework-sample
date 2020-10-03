@@ -46,12 +46,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
+			<artifactId>slf4j-api</artifactId>
 			<version>2.0.0-alpha1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
+			<artifactId>slf4j-log4j12</artifactId>
 			<version>2.0.0-alpha1</version>
 		</dependency>
 		<dependency>
@@ -85,10 +85,10 @@
 			<version>1.0.7</version>
 		</dependency>
 		<dependency>
-    		<groupId>com.testautomationguru.pdfutil</groupId>
-    		<artifactId>pdf-util</artifactId>
-    		<version>0.0.3</version>
-		</dependency>		
+			<groupId>com.testautomationguru.pdfutil</groupId>
+			<artifactId>pdf-util</artifactId>
+			<version>0.0.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
