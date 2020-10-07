@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cucumber.version>4.2.0</cucumber.version>
+		<logger.version>2.0.0-alpha1</logger.version>
 	</properties>
 
 	<dependencies>
@@ -46,13 +47,18 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${logger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>2.0.0-alpha1</version>
+			<version>${logger.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>2.0.0-alpha1</version>
+			<version>${logger.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -112,6 +118,12 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<systemPropertyVariables>
+						<property>
+							<name>browser</name>
+							<value>${browser}</value>
+						</property>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<!-- To generate report similar to Jenkin report,maven-cucumber-reporting 

@@ -180,6 +180,7 @@ public class OrderHistoryPage {
 	public void viewOrderDetails() {
 		orderHistoryDetailsButton.click();
 		log.info("Clicked on Order Details button");
+		eo.waitForVisibilityOfElement(reorderButton);
 		eo.scrollToElement(reorderButton);
 	}
 	

@@ -86,8 +86,11 @@ public class DriverManager {
 	}
 
 	private DriverType getBrowser() {
-		String browserName = GetConfig.getConfigProperty("browser");
-		if(browserName == null || browserName.equals("chrome")) 
+		String browserName = System.getProperty("browser");		
+		if(browserName == null) {
+			browserName = GetConfig.getConfigProperty("browser");
+		}
+		if(browserName.equalsIgnoreCase("chrome")) 
 			return DriverType.CHROME;
 		else if(browserName.equalsIgnoreCase("firefox")) 
 			return DriverType.FIREFOX;
