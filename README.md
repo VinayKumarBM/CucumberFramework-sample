@@ -16,11 +16,12 @@ For Demo purpose all the test cases are created for [automationpractice.com](htt
 
 
 ## **Required Setup :**
+
 - [Java](https://www.guru99.com/install-java.html) should be installed and configured.
 - [Maven](https://mkyong.com/maven/how-to-install-maven-in-windows/) should be installed and configured.
 - Download the files from Git reporsitory either as zip file OR using git.
 
-### **Running Test: **
+## **Running Test:**
 
 Open the command prompt and naivgate to the folder in which pom.xml file is present.
 Run the below Maven command.
@@ -36,5 +37,5 @@ If we need to run any specific scenario in the feature file on a particular brow
 
 Once the execution completes reports will be generated in below folder structure.
 
-1. **Extent Report: ** */target/generated-reports/TestResults.html*
-2. **ReportBuilder Report: ** */target/generated-reports/detailed-report/index.html*
+1. **Extent Report:** */target/generated-reports/TestResults.html*
+2. **ReportBuilder Report:** */target/generated-reports/detailed-report/index.html*
