@@ -1,7 +1,4 @@
 
-# **CucumberFramework-sample**
-
-
 ## **Overview:**
 Cucumber is one such open source tool, which supports behavior driven development. To be more precise, Cucumber can be defined as a testing framework, driven by plain English text. It serves as documentation, automated tests, and a development aid – all in one.
 
