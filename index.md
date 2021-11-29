@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/VinayKumarBM/CucumberFramework-sample/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# **CucumberFramework-sample**
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## **Overview:**
+Cucumber is one such open source tool, which supports behavior driven development. To be more precise, Cucumber can be defined as a testing framework, driven by plain English text. It serves as documentation, automated tests, and a development aid – all in one.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+For Demo purpose all the test cases are created for [automationpractice.com](http://automationpractice.com/index.php) site.
 
-```markdown
-Syntax highlighted code block
+## **Some of the key features of this framework:**
 
-# Header 1
-## Header 2
-### Header 3
+* It support reports like Cucumber, Extent & ReportBuilder reports.
+* It support parallel execution of feature files.
+* It generates execution log file.  
+* It also supports PDF file validation.
+* Can run test on Chrome, Firefox and Internet explorer browser from command line.
+* Easy integration of CI/CD pipeline.
+* Framework uses Page Object Design Pattern, hence there is clean separation between test code and page specific code such as locators and layout.
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## **Required Setup :**
 
-**Bold** and _Italic_ and `Code` text
+- [Java](https://www.guru99.com/install-java.html) should be installed and configured.
+- [Maven](https://mkyong.com/maven/how-to-install-maven-in-windows/) should be installed and configured.
+- Download the files from Git repository either as zip file OR using [Git](https://phoenixnap.com/kb/how-to-install-git-windows).
 
-[Link](url) and ![Image](src)
-```
+## **Running Test:**
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Open the command prompt and navigate to the folder in which pom.xml file is present.
+Run the below Maven command.
 
-### Jekyll Themes
+    mvn test
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/VinayKumarBM/CucumberFramework-sample/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Above command will run all the tests in the feature files on default Chrome browser.
 
-### Support or Contact
+If we need to run any specific scenario in the feature file on a particular browser, then run the below command by changing @tags and browser name.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+    mvn test -Dcucumber.options="--tags @newAddress" -Dbrowser="firefox"
+	
+
+Once the execution completes reports will be generated in below folder structure.
+
+1. **Extent Report:** */target/generated-reports/TestResults.html*
+2. **ReportBuilder Report:** */target/generated-reports/detailed-report/index.html*
